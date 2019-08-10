@@ -1,6 +1,6 @@
 import * as React from "react";
-import Header from "./components/Header/Header";
+import SnakeGame from "./components/SnakeGame";
 
-const App: React.FunctionComponent = () => <Header>Snake Game</Header>;
+const App: React.FunctionComponent = () => <SnakeGame />;
 
 export default App;
