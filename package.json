@@ -1,0 +1,57 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "description": "A basic implementation of snake",
+  "main": "index.html",
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/react": "^16.9.1",
+    "@types/react-dom": "^16.8.5",
+    "@types/styled-components": "^4.1.18",
+    "babel-loader": "^8.0.6",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.12.10",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "test": "npm test",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewxbird/SnakeAI.git"
+  },
+  "author": "Matthew Bird",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matthewxbird/SnakeAI/issues"
+  },
+  "homepage": "https://github.com/matthewxbird/SnakeAI#readme",
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ],
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      "react-hot-loader/babel"
+    ]
+  }
+}
