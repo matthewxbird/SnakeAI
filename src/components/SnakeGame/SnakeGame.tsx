@@ -5,14 +5,17 @@ class SnakeGame {
   private snakeWidth: number = 10;
   private snakeSpeed: number = 2;
 
-  private height: number = 100;
-  private width: number = 100;
+  private height: number = 400;
+  private width: number = 400;
 
   private xLimit: number = this.width - this.snakeWidth;
   private yLimit: number = this.height - this.snakeWidth;
 
   private xPos: number = 50;
   private yPos: number = 50;
+
+  private xDir: number = 1;
+  private yDir: number = 0;
 
   constructor() {
     this.canvas = document.getElementById("rootCanvas");
@@ -21,57 +24,50 @@ class SnakeGame {
     this.ctx = this.canvas.getContext("2d");
   }
 
-  public move(key: string) {
+  public changeDirection(key: string) {
     switch (key) {
       case "ArrowUp":
-        this.moveUp();
+        this.xDir = 0;
+        this.yDir = -1;
         break;
       case "ArrowDown":
-        this.moveDown();
+        this.xDir = 0;
+        this.yDir = 1;
         break;
       case "ArrowLeft":
-        this.moveLeft();
+        this.xDir = -1;
+        this.yDir = 0;
         break;
       case "ArrowRight":
-        this.moveRight();
+        this.xDir = 1;
+        this.yDir = 0;
         break;
     }
   }
 
-  public moveUp() {
-    if (this.yPos > 0) {
-      this.yPos = this.yPos - this.snakeSpeed;
-    } else {
-      this.sideCollison();
-    }
+  public update(): void {
+    this.xPos += this.xDir * this.snakeSpeed;
+    this.yPos += this.yDir * this.snakeSpeed;
+
+    this.ensureBounds();
   }
 
-  public moveDown() {
-    if (this.yPos < this.yLimit) {
-      this.yPos = this.yPos + this.snakeSpeed;
-    } else {
-      this.sideCollison();
+  public ensureBounds(): void {
+    if (this.xPos < 0) {
+      this.xPos = 0;
     }
-  }
 
-  public moveLeft() {
-    if (this.xPos > 0) {
-      this.xPos = this.xPos - this.snakeSpeed;
-    } else {
-      this.sideCollison();
+    if (this.yPos < 0) {
+      this.yPos = 0;
     }
-  }
 
-  public moveRight() {
-    if (this.xPos < this.xLimit) {
-      this.xPos = this.xPos + this.snakeSpeed;
-    } else {
-      this.sideCollison();
+    if (this.xPos > this.xLimit) {
+      this.xPos = this.xLimit;
     }
-  }
 
-  public sideCollison() {
-    console.log("Don't move");
+    if (this.yPos > this.yLimit) {
+      this.yPos = this.yLimit;
+    }
   }
 
   public clearScreen(): void {

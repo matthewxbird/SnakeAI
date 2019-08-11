@@ -8,14 +8,15 @@ class App {
   }
 
   public start() {
-    setInterval(this.mainLoop.bind(this), 33);
+    setInterval(this.mainLoop.bind(this), 20);
   }
 
   public onKeyDown(e: KeyboardEvent) {
-    this._instance.move(e.key);
+    this._instance.changeDirection(e.key);
   }
 
   private mainLoop(): void {
+    this._instance.update();
     this._instance.draw();
   }
 }
