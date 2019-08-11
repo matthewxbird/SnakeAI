@@ -1,8 +1,10 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-
+import SnakeGame from "./components/SnakeGame";
 import App from "./App";
 
-const root = document.getElementById("root") as HTMLElement;
+const app = new App(new SnakeGame());
 
-ReactDOM.render(<App />, root);
+document.onkeydown = e => {
+  app.onKeyDown(e);
+};
+
+app.start();

@@ -9,7 +9,7 @@
     // Don't emit; allow Babel to transform files.
     "noEmit": true,
     // Enable strictest settings like strictNullChecks & noImplicitAny.
-    "strict": true,
+    "strict": false,
     // Disallow features that require cross-file information for emit.
     "isolatedModules": true,
     // Import non-ES modules as default imports.
@@ -17,7 +17,9 @@
     // Enable react.
     "jsx": "react",
     // BaseUrl defines the root of the application file structure.
-    "baseUrl": "."
+    "baseUrl": ".",
+
+    "sourceMap": true
   },
   "include": ["src"]
 }
