@@ -2,22 +2,23 @@ import Snake from "../Snake/Snake";
 import Position from "../Position";
 
 class GameContainer {
-  private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
   private _snake: Snake;
 
-  private height: number = 400;
-  private width: number = 400;
+  private height: number;
+  private width: number;
 
   private xDir: number = 1;
   private yDir: number = 0;
 
   constructor() {
-    this.canvas = document.getElementById("rootCanvas");
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
-    this.ctx = this.canvas.getContext("2d");
+    const canvas: HTMLCanvasElement = document.getElementById(
+      "rootCanvas"
+    ) as HTMLCanvasElement;
+    this.width = canvas.width;
+    this.height = canvas.height;
+    this.ctx = canvas.getContext("2d");
     this._snake = new Snake(new Position(50, 50), 10, 2, "#f00");
   }
 
