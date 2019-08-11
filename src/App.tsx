@@ -8,7 +8,7 @@ class App {
   }
 
   public start() {
-    setInterval(this.mainLoop.bind(this), 20);
+    setInterval(this.mainLoop.bind(this), 100);
   }
 
   public onKeyDown(e: KeyboardEvent) {

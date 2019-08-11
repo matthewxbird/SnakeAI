@@ -1,21 +1,32 @@
 import Position from "../Position";
+import BodySegment from "../BodySegment";
+import ColourGenerator from "../ColourGenerator";
 
 class Snake {
   private _width: number;
   private _speed: number;
-  private _colour: string;
-  private _position: Position;
+  private _bodySegments: Array<BodySegment>;
+  private _startingSegments = 10;
 
-  constructor(
-    position: Position,
-    width: number,
-    speed: number,
-    colour: string
-  ) {
-    this._position = position;
+  constructor(position: Position, width: number, speed: number) {
     this._width = width;
     this._speed = speed;
-    this._colour = colour;
+
+    this._bodySegments = new Array<BodySegment>();
+
+    const colorGenerator = new ColourGenerator();
+
+    for (let index = 0; index < this._startingSegments; index++) {
+      const startingX = position.GetX() - this._width * index;
+      const startingY = position.GetY();
+      this._bodySegments.push(
+        new BodySegment(
+          this._width,
+          colorGenerator.getRandomColor(),
+          new Position(startingX, startingY)
+        )
+      );
+    }
   }
 
   public getWidth() {
@@ -27,21 +38,28 @@ class Snake {
   }
 
   public getPos() {
-    return this._position;
+    return this._bodySegments[0].getPos();
   }
 
-  public setPos(x: number, y: number) {
-    this._position.Set(x, y);
+  public move(xDir: number, yDir: number) {
+    const x = xDir * this._width;
+    const y = yDir * this._width;
+
+    const headPos = this._bodySegments[0].getPos();
+    let prevPosition = new Position(headPos.GetX(), headPos.GetY());
+    this._bodySegments[0].move(x, y);
+
+    for (let index = 1; index < this._bodySegments.length; index++) {
+      const tempPrevPos = this._bodySegments[index].getPos();
+      this._bodySegments[index].setPos(prevPosition);
+      prevPosition = new Position(tempPrevPos.GetX(), tempPrevPos.GetY());
+    }
   }
 
   public draw(context: CanvasRenderingContext2D) {
-    context.fillStyle = this._colour;
-    context.fillRect(
-      this._position.GetX(),
-      this._position.GetY(),
-      this._width,
-      this._width
-    );
+    this._bodySegments.forEach(segment => {
+      segment.draw(context);
+    });
   }
 }
 
