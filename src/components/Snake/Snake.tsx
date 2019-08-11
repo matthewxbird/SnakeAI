@@ -1,6 +1,6 @@
 import Position from "../Position";
 import BodySegment from "../BodySegment";
-import ColourGenerator from "../ColourGenerator";
+import Randomiser from "../Randomiser";
 
 class Snake {
   private _width: number;
@@ -15,15 +15,13 @@ class Snake {
 
     this._bodySegments = new Array<BodySegment>();
 
-    const colorGenerator = new ColourGenerator();
-
     for (let index = 0; index < this._startingSegments; index++) {
       const startingX = position.GetX() - this._width * index;
       const startingY = position.GetY();
       this._bodySegments.push(
         new BodySegment(
           this._width,
-          colorGenerator.getRandomColor(),
+          Randomiser.getRandomColor(),
           new Position(startingX, startingY)
         )
       );

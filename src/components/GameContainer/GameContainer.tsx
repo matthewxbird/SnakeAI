@@ -1,5 +1,7 @@
 import Snake from "../Snake/Snake";
 import Position from "../Position";
+import Cherry from "../Cherry";
+import Randomiser from "../Randomiser/Randomiser";
 
 class GameContainer {
   private _ctx: CanvasRenderingContext2D;
@@ -11,6 +13,8 @@ class GameContainer {
 
   private _xDir: number = 1;
   private _yDir: number = 0;
+
+  private _cherry: Cherry;
 
   constructor() {
     const canvas: HTMLCanvasElement = document.getElementById(
@@ -54,6 +58,15 @@ class GameContainer {
   public update(): void {
     this._snake.move(this._xDir, this._yDir);
     this.checkDeath();
+    this.generateCherry();
+  }
+
+  public generateCherry() {
+    if (!this._cherry) {
+      this._cherry = new Cherry(
+        Randomiser.getRandomPosition(0, 0, this._width - 20, this._height - 20)
+      );
+    }
   }
 
   public checkDeath() {
@@ -76,6 +89,11 @@ class GameContainer {
   public draw(): void {
     this.clearScreen();
     this.drawSnake();
+    this.drawCherry();
+  }
+
+  public drawCherry() {
+    this._cherry.draw(this._ctx);
   }
 
   public drawSnake() {

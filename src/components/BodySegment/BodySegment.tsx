@@ -1,5 +1,4 @@
 import Position from "../Position";
-import ColourGenerator from "../ColourGenerator";
 
 class BodySegment {
   private _width: number;
