@@ -53,6 +53,20 @@ class GameContainer {
 
   public update(): void {
     this._snake.move(this._xDir, this._yDir);
+    this.checkDeath();
+  }
+
+  public checkDeath() {
+    const snakePosition = this._snake.getPos();
+
+    if (
+      snakePosition.GetX() < 0 ||
+      snakePosition.GetY() < 0 ||
+      snakePosition.GetX() > this._width - this._snake.getWidth() ||
+      snakePosition.GetY() > this._height - this._snake.getWidth()
+    ) {
+      this._snake.die();
+    }
   }
 
   // public ensureBounds(): void {

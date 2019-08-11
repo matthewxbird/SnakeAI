@@ -7,6 +7,7 @@ class Snake {
   private _speed: number;
   private _bodySegments: Array<BodySegment>;
   private _startingSegments = 10;
+  private _dead: boolean = false;
 
   constructor(position: Position, width: number, speed: number) {
     this._width = width;
@@ -35,6 +36,12 @@ class Snake {
 
   public getSpeed() {
     return this._speed;
+  }
+
+  public die() {
+    this._bodySegments.forEach(segment => {
+      segment.die();
+    });
   }
 
   public getPos() {

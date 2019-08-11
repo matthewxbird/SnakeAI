@@ -1,9 +1,11 @@
 import Position from "../Position";
+import ColourGenerator from "../ColourGenerator";
 
 class BodySegment {
   private _width: number;
   private _colour: string;
   private _position: Position;
+  private _isDead: boolean;
 
   constructor(width: number, colour: string, position: Position) {
     this._width = width;
@@ -16,10 +18,27 @@ class BodySegment {
   }
 
   public setPos(pos: Position) {
+    if (this._isDead) {
+      return;
+    }
     this._position = pos;
   }
 
+  public die() {
+    this._isDead = true;
+
+    if (this._colour === "#f00") {
+      this._colour = "#000";
+    } else {
+      this._colour = "#f00";
+    }
+  }
+
   public move(x: number, y: number) {
+    if (this._isDead) {
+      return;
+    }
+
     const currentX = this._position.GetX();
     const currentY = this._position.GetY();
     const newX = currentX + x;
