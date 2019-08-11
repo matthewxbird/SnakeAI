@@ -69,28 +69,6 @@ class GameContainer {
     }
   }
 
-  // public ensureBounds(): void {
-  //   if (this._snake.getPos().GetX() < 0) {
-  //     this._snake.move(0, this._snake.getPos().GetY());
-  //   }
-
-  //   if (this._snake.getPos().GetY() < 0) {
-  //     this._snake.setPos(this._snake.getPos().GetX(), 0);
-  //   }
-
-  //   let xLimit: number = this._width - this._snake.getWidth();
-
-  //   if (this._snake.getPos().GetX() > xLimit) {
-  //     this._snake.setPos(xLimit, this._snake.getPos().GetY());
-  //   }
-
-  //   let yLimit: number = this._height - this._snake.getWidth();
-
-  //   if (this._snake.getPos().GetY() > yLimit) {
-  //     this._snake.setPos(this._snake.getPos().GetX(), yLimit);
-  //   }
-  // }
-
   public clearScreen(): void {
     this._ctx.clearRect(0, 0, this._width, this._height);
   }
