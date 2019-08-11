@@ -1,6 +1,7 @@
 import Snake from "../Snake/Snake";
+import Position from "../Position";
 
-class SnakeGame {
+class GameContainer {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
@@ -17,7 +18,7 @@ class SnakeGame {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.ctx = this.canvas.getContext("2d");
-    this._snake = new Snake();
+    this._snake = new Snake(new Position(50, 50), 10, 2, "#f00");
   }
 
   public changeDirection(key: string) {
@@ -51,31 +52,32 @@ class SnakeGame {
   }
 
   public update(): void {
-    this._snake.xPos += this.xDir * this._snake.speed;
-    this._snake.yPos += this.yDir * this._snake.speed;
-
+    const existingPos = this._snake.getPos();
+    const newX = existingPos.GetX() + this.xDir * this._snake.getSpeed();
+    const newY = existingPos.GetY() + this.yDir * this._snake.getSpeed();
+    this._snake.setPos(newX, newY);
     this.ensureBounds();
   }
 
   public ensureBounds(): void {
-    if (this._snake.xPos < 0) {
-      this._snake.xPos = 0;
+    if (this._snake.getPos().GetX() < 0) {
+      this._snake.setPos(0, this._snake.getPos().GetY());
     }
 
-    if (this._snake.yPos < 0) {
-      this._snake.yPos = 0;
+    if (this._snake.getPos().GetY() < 0) {
+      this._snake.setPos(this._snake.getPos().GetX(), 0);
     }
 
-    let xLimit: number = this.width - this._snake.width;
+    let xLimit: number = this.width - this._snake.getWidth();
 
-    if (this._snake.xPos > xLimit) {
-      this._snake.xPos = xLimit;
+    if (this._snake.getPos().GetX() > xLimit) {
+      this._snake.setPos(xLimit, this._snake.getPos().GetY());
     }
 
-    let yLimit: number = this.height - this._snake.width;
+    let yLimit: number = this.height - this._snake.getWidth();
 
-    if (this._snake.yPos > yLimit) {
-      this._snake.yPos = yLimit;
+    if (this._snake.getPos().GetY() > yLimit) {
+      this._snake.setPos(this._snake.getPos().GetX(), yLimit);
     }
   }
 
@@ -89,14 +91,8 @@ class SnakeGame {
   }
 
   public drawSnake() {
-    this.ctx.fillStyle = "#f00";
-    this.ctx.fillRect(
-      this._snake.xPos,
-      this._snake.yPos,
-      this._snake.width,
-      this._snake.width
-    );
+    this._snake.draw(this.ctx);
   }
 }
 
-export default SnakeGame;
+export default GameContainer;

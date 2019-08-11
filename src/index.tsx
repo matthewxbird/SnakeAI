@@ -1,7 +1,7 @@
-import SnakeGame from "./components/SnakeGame";
+import GameContainer from "./components/GameContainer";
 import App from "./App";
 
-const app = new App(new SnakeGame());
+const app = new App(new GameContainer());
 
 document.onkeydown = e => {
   app.onKeyDown(e);

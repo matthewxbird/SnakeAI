@@ -1,9 +1,9 @@
-import SnakeGame from "./components/SnakeGame";
+import GameContainer from "./components/GameContainer";
 
 class App {
-  private _instance: SnakeGame;
+  private _instance: GameContainer;
 
-  constructor(instance: SnakeGame) {
+  constructor(instance: GameContainer) {
     this._instance = instance;
   }
 
