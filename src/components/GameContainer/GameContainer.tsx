@@ -31,26 +31,34 @@ class GameContainer {
       case "ArrowUp":
       case "W":
       case "w":
-        this._xDir = 0;
-        this._yDir = -1;
+        if (this._yDir !== 1) {
+          this._yDir = -1;
+          this._xDir = 0;
+        }
         break;
       case "ArrowDown":
       case "S":
       case "s":
-        this._xDir = 0;
-        this._yDir = 1;
+        if (this._yDir !== -1) {
+          this._yDir = 1;
+          this._xDir = 0;
+        }
         break;
       case "ArrowLeft":
       case "A":
       case "a":
-        this._xDir = -1;
-        this._yDir = 0;
+        if (this._xDir !== 1) {
+          this._xDir = -1;
+          this._yDir = 0;
+        }
         break;
       case "ArrowRight":
       case "D":
       case "d":
-        this._xDir = 1;
-        this._yDir = 0;
+        if (this._xDir !== -1) {
+          this._xDir = 1;
+          this._yDir = 0;
+        }
         break;
     }
   }
