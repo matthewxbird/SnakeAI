@@ -93,9 +93,9 @@ class GameContainer {
 
   private checkCherryCollision(): boolean {
     const snakeLeft = this._snake.Position.X;
-    const snakeRight = this._snake.Position.X + this._snake.getWidth();
+    const snakeRight = this._snake.Position.X + this._snake.Width;
     const snakeTop = this._snake.Position.Y;
-    const snakeBottom = this._snake.Position.Y + this._snake.getWidth();
+    const snakeBottom = this._snake.Position.Y + this._snake.Width;
 
     const cherryLeft = this._cherry.Position.X;
     const cherryRight = this._cherry.Position.X + this._cherry.Width;
@@ -114,8 +114,8 @@ class GameContainer {
     if (
       this._snake.Position.X < 0 ||
       this._snake.Position.Y < 0 ||
-      this._snake.Position.X > this._width - this._snake.getWidth() ||
-      this._snake.Position.Y > this._height - this._snake.getWidth()
+      this._snake.Position.X > this._width - this._snake.Width ||
+      this._snake.Position.Y > this._height - this._snake.Width
     ) {
       return true;
     }

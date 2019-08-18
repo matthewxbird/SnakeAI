@@ -28,11 +28,11 @@ class Snake {
     }
   }
 
-  public getWidth() {
+  public get Width() {
     return this._width;
   }
 
-  public getSpeed() {
+  public get Speed() {
     return this._speed;
   }
 
