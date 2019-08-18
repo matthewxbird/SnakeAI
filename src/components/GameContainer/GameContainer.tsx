@@ -69,14 +69,12 @@ class GameContainer {
     }
   }
 
-  public checkDeath() {
-    const snakePosition = this._snake.getPos();
-
+  public checkDeath(): void {
     if (
-      snakePosition.GetX() < 0 ||
-      snakePosition.GetY() < 0 ||
-      snakePosition.GetX() > this._width - this._snake.getWidth() ||
-      snakePosition.GetY() > this._height - this._snake.getWidth()
+      this._snake.Position.X < 0 ||
+      this._snake.Position.Y < 0 ||
+      this._snake.Position.X > this._width - this._snake.getWidth() ||
+      this._snake.Position.Y > this._height - this._snake.getWidth()
     ) {
       this._snake.die();
     }

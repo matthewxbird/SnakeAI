@@ -12,7 +12,7 @@ class BodySegment {
     this._position = position;
   }
 
-  public getPos(): Position {
+  public get Position(): Position {
     return this._position;
   }
 
@@ -38,18 +38,16 @@ class BodySegment {
       return;
     }
 
-    const currentX = this._position.GetX();
-    const currentY = this._position.GetY();
-    const newX = currentX + x;
-    const newY = currentY + y;
+    const newX = this._position.X + x;
+    const newY = this._position.Y + y;
     this._position.Set(newX, newY);
   }
 
   public draw(context: CanvasRenderingContext2D) {
     context.fillStyle = this._colour;
     context.fillRect(
-      this._position.GetX(),
-      this._position.GetY(),
+      this._position.X,
+      this._position.Y,
       this._width,
       this._width
     );

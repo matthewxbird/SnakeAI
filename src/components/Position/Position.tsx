@@ -12,11 +12,11 @@ class Position {
     this._y = y;
   }
 
-  public GetX(): number {
+  public get X(): number {
     return this._x;
   }
 
-  public GetY(): number {
+  public get Y(): number {
     return this._y;
   }
 }

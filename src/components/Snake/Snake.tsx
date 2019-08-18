@@ -16,8 +16,8 @@ class Snake {
     this._bodySegments = new Array<BodySegment>();
 
     for (let index = 0; index < this._startingSegments; index++) {
-      const startingX = position.GetX() - this._width * index;
-      const startingY = position.GetY();
+      const startingX = position.X - this._width * index;
+      const startingY = position.Y;
       this._bodySegments.push(
         new BodySegment(
           this._width,
@@ -37,27 +37,29 @@ class Snake {
   }
 
   public die() {
+    console.debug("dead");
+    this._dead = true;
     this._bodySegments.forEach(segment => {
       segment.die();
     });
   }
 
-  public getPos() {
-    return this._bodySegments[0].getPos();
+  public get Position() {
+    return this._bodySegments[0].Position;
   }
 
   public move(xDir: number, yDir: number) {
     const x = xDir * this._width;
     const y = yDir * this._width;
 
-    const headPos = this._bodySegments[0].getPos();
-    let prevPosition = new Position(headPos.GetX(), headPos.GetY());
+    const headPos = this._bodySegments[0].Position;
+    let prevPosition = new Position(headPos.X, headPos.Y);
     this._bodySegments[0].move(x, y);
 
     for (let index = 1; index < this._bodySegments.length; index++) {
-      const tempPrevPos = this._bodySegments[index].getPos();
+      const tempPrevPos = this._bodySegments[index].Position;
       this._bodySegments[index].setPos(prevPosition);
-      prevPosition = new Position(tempPrevPos.GetX(), tempPrevPos.GetY());
+      prevPosition = new Position(tempPrevPos.X, tempPrevPos.Y);
     }
   }
 
