@@ -134,7 +134,9 @@ class GameContainer {
   }
 
   public drawCherry() {
-    this._cherry.draw(this._ctx);
+    if (this._cherry) {
+      this._cherry.draw(this._ctx);
+    }
   }
 
   public drawSnake() {
