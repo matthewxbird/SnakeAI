@@ -19,6 +19,10 @@ class Cherry {
     );
   }
 
+  public get Width(): number {
+    return this._width;
+  }
+
   public get Position(): Position {
     return this._position;
   }

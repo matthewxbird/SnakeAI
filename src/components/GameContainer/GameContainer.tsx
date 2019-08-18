@@ -65,8 +65,14 @@ class GameContainer {
 
   public update(): void {
     this._snake.move(this._xDir, this._yDir);
-    this.checkDeath();
+    if (this.checkDeath()) {
+      this._snake.die();
+    }
+
     this.generateCherry();
+    if (this.checkCherryCollision()) {
+      this._cherry = null;
+    }
   }
 
   public generateCherry() {
@@ -77,15 +83,44 @@ class GameContainer {
     }
   }
 
-  public checkDeath(): void {
+  public checkDeath(): boolean {
+    if (this.checkWallCollision()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private checkCherryCollision(): boolean {
+    const snakeLeft = this._snake.Position.X;
+    const snakeRight = this._snake.Position.X + this._snake.getWidth();
+    const snakeTop = this._snake.Position.Y;
+    const snakeBottom = this._snake.Position.Y + this._snake.getWidth();
+
+    const cherryLeft = this._cherry.Position.X;
+    const cherryRight = this._cherry.Position.X + this._cherry.Width;
+    const cherryTop = this._cherry.Position.Y;
+    const cherryBottom = this._cherry.Position.Y + this._cherry.Width;
+
+    return !(
+      cherryLeft > snakeRight ||
+      cherryRight < snakeLeft ||
+      cherryTop > snakeBottom ||
+      cherryBottom < snakeTop
+    );
+  }
+
+  private checkWallCollision(): boolean {
     if (
       this._snake.Position.X < 0 ||
       this._snake.Position.Y < 0 ||
       this._snake.Position.X > this._width - this._snake.getWidth() ||
       this._snake.Position.Y > this._height - this._snake.getWidth()
     ) {
-      this._snake.die();
+      return true;
     }
+
+    return false;
   }
 
   public clearScreen(): void {
