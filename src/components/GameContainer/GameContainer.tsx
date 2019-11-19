@@ -72,6 +72,7 @@ class GameContainer {
     }
 
     if (this.checkCherryCollision()) {
+      this._snake.eat();
       this._cherry = null;
     }
 
@@ -127,22 +128,28 @@ class GameContainer {
       return false;
     }
 
-    const snakeLeft = this._snake.Head.Position.X;
-    const snakeRight = this._snake.Head.Position.X + this._snake.Width;
-    const snakeTop = this._snake.Head.Position.Y;
-    const snakeBottom = this._snake.Head.Position.Y + this._snake.Width;
+    const snakeHeadLeft = this._snake.Head.Position.X;
+    const snakeHeadRight = this._snake.Head.Position.X + this._snake.Width;
+    const snakeHeadTop = this._snake.Head.Position.Y;
+    const snakeHeadBottom = this._snake.Head.Position.Y + this._snake.Width;
 
     const cherryLeft = this._cherry.Position.X;
     const cherryRight = this._cherry.Position.X + this._cherry.Width;
     const cherryTop = this._cherry.Position.Y;
     const cherryBottom = this._cherry.Position.Y + this._cherry.Width;
 
-    return !(
-      cherryLeft > snakeRight ||
-      cherryRight < snakeLeft ||
-      cherryTop > snakeBottom ||
-      cherryBottom < snakeTop
+    const x_overlap = Math.max(
+      0,
+      Math.min(snakeHeadRight, cherryRight) -
+        Math.max(snakeHeadLeft, cherryLeft)
     );
+    const y_overlap = Math.max(
+      0,
+      Math.min(snakeHeadBottom, cherryBottom) -
+        Math.max(snakeHeadTop, cherryTop)
+    );
+
+    return x_overlap * y_overlap !== 0;
   }
 
   private checkWallCollision(): boolean {
@@ -164,8 +171,8 @@ class GameContainer {
 
   public draw(): void {
     this.clearScreen();
-    this.drawSnake();
     this.drawCherry();
+    this.drawSnake();
   }
 
   public drawCherry() {

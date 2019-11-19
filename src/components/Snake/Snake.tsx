@@ -48,6 +48,21 @@ class Snake {
     return this._bodySegments.slice(1);
   }
 
+  public eat() {
+    const currentLastSegmentsPosition = this._bodySegments[
+      this._bodySegments.length - 1
+    ].Position;
+    this._bodySegments.push(
+      new BodySegment(
+        this._width,
+        Randomiser.getRandomColor(),
+        currentLastSegmentsPosition
+      )
+    );
+
+    console.log("Body length is now " + this._bodySegments.length);
+  }
+
   public die() {
     this._dead = true;
     this._bodySegments.forEach(segment => {
