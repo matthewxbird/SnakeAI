@@ -64,15 +64,18 @@ class GameContainer {
   }
 
   public update(): void {
-    this._snake.move(this._xDir, this._yDir);
+    if (this._snake.IsAlive) this._snake.move(this._xDir, this._yDir);
+
     if (this.checkDeath()) {
       this._snake.die();
+      return;
     }
 
-    this.generateCherry();
     if (this.checkCherryCollision()) {
       this._cherry = null;
     }
+
+    this.generateCherry();
   }
 
   public generateCherry() {
@@ -84,14 +87,49 @@ class GameContainer {
   }
 
   public checkDeath(): boolean {
-    if (this.checkWallCollision()) {
+    const wallCollide = this.checkWallCollision();
+    const snakeCollide = this.checkSnakeCollision();
+
+    if (wallCollide || snakeCollide) {
       return true;
     }
 
     return false;
   }
 
+  private checkSnakeCollision() {
+    let collisionDetected: boolean = false;
+    //Check collision with the snake or any part of its sbody
+    const snakeHeadLeft = this._snake.Position.X;
+    const snakeHeadRight = this._snake.Position.X + this._snake.Width;
+    const snakeHeadTop = this._snake.Position.Y;
+    const snakeHeadBottom = this._snake.Position.Y + this._snake.Width;
+
+    this._snake.Body.forEach(segment => {
+      const bodyLeft = segment.Position.X;
+      const bodyRight = segment.Position.X + this._snake.Width;
+      const bodyTop = segment.Position.Y;
+      const bodyBottom = segment.Position.Y + this._snake.Width;
+
+      if (
+        bodyLeft >= snakeHeadLeft &&
+        bodyRight <= snakeHeadRight &&
+        bodyTop >= snakeHeadTop &&
+        bodyBottom <= snakeHeadBottom
+      ) {
+        collisionDetected = true;
+        return;
+      }
+    });
+
+    return collisionDetected;
+  }
+
   private checkCherryCollision(): boolean {
+    if (this._snake === null || this._cherry == null) {
+      return false;
+    }
+
     const snakeLeft = this._snake.Position.X;
     const snakeRight = this._snake.Position.X + this._snake.Width;
     const snakeTop = this._snake.Position.Y;

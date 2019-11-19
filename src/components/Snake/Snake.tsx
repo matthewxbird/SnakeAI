@@ -28,6 +28,10 @@ class Snake {
     }
   }
 
+  public get IsAlive() {
+    return !this._dead;
+  }
+
   public get Width() {
     return this._width;
   }
@@ -36,8 +40,15 @@ class Snake {
     return this._speed;
   }
 
+  public get Head() {
+    return this._bodySegments[0];
+  }
+
+  public get Body() {
+    return this._bodySegments.slice(1);
+  }
+
   public die() {
-    console.debug("dead");
     this._dead = true;
     this._bodySegments.forEach(segment => {
       segment.die();
