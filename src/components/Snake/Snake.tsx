@@ -6,7 +6,7 @@ class Snake {
   private _width: number;
   private _speed: number;
   private _bodySegments: Array<BodySegment>;
-  private _startingSegments = 10;
+  private _startingSegments = 3;
   private _dead: boolean = false;
 
   constructor(position: Position, width: number, speed: number) {
