@@ -55,10 +55,6 @@ class Snake {
     });
   }
 
-  public get Position() {
-    return this._bodySegments[0].Position;
-  }
-
   public move(xDir: number, yDir: number) {
     const x = xDir * this._width;
     const y = yDir * this._width;

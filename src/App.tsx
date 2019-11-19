@@ -1,5 +1,4 @@
 import GameContainer from "./components/GameContainer";
-import { isMainThread } from "worker_threads";
 
 class App {
   private _instance: GameContainer;
@@ -10,7 +9,7 @@ class App {
   }
 
   public start() {
-    setInterval(this.mainLoop.bind(this), 500);
+    setInterval(this.mainLoop.bind(this), 100);
     //this.mainLoop.bind(this);
   }
 

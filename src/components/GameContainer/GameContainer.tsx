@@ -87,10 +87,7 @@ class GameContainer {
   }
 
   public checkDeath(): boolean {
-    const wallCollide = this.checkWallCollision();
-    const snakeCollide = this.checkSnakeCollision();
-
-    if (wallCollide || snakeCollide) {
+    if (this.checkWallCollision() || this.checkSnakeCollision()) {
       return true;
     }
 
@@ -100,10 +97,10 @@ class GameContainer {
   private checkSnakeCollision() {
     let collisionDetected: boolean = false;
     //Check collision with the snake or any part of its sbody
-    const snakeHeadLeft = this._snake.Position.X;
-    const snakeHeadRight = this._snake.Position.X + this._snake.Width;
-    const snakeHeadTop = this._snake.Position.Y;
-    const snakeHeadBottom = this._snake.Position.Y + this._snake.Width;
+    const snakeHeadLeft = this._snake.Head.Position.X;
+    const snakeHeadRight = this._snake.Head.Position.X + this._snake.Width;
+    const snakeHeadTop = this._snake.Head.Position.Y;
+    const snakeHeadBottom = this._snake.Head.Position.Y + this._snake.Width;
 
     this._snake.Body.forEach(segment => {
       const bodyLeft = segment.Position.X;
@@ -130,10 +127,10 @@ class GameContainer {
       return false;
     }
 
-    const snakeLeft = this._snake.Position.X;
-    const snakeRight = this._snake.Position.X + this._snake.Width;
-    const snakeTop = this._snake.Position.Y;
-    const snakeBottom = this._snake.Position.Y + this._snake.Width;
+    const snakeLeft = this._snake.Head.Position.X;
+    const snakeRight = this._snake.Head.Position.X + this._snake.Width;
+    const snakeTop = this._snake.Head.Position.Y;
+    const snakeBottom = this._snake.Head.Position.Y + this._snake.Width;
 
     const cherryLeft = this._cherry.Position.X;
     const cherryRight = this._cherry.Position.X + this._cherry.Width;
@@ -150,10 +147,10 @@ class GameContainer {
 
   private checkWallCollision(): boolean {
     if (
-      this._snake.Position.X < 0 ||
-      this._snake.Position.Y < 0 ||
-      this._snake.Position.X > this._width - this._snake.Width ||
-      this._snake.Position.Y > this._height - this._snake.Width
+      this._snake.Head.Position.X < 0 ||
+      this._snake.Head.Position.Y < 0 ||
+      this._snake.Head.Position.X > this._width - this._snake.Width ||
+      this._snake.Head.Position.Y > this._height - this._snake.Width
     ) {
       return true;
     }
