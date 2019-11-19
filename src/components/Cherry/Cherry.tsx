@@ -3,7 +3,7 @@ import Position from "../Position";
 class Cherry {
   private _position: Position;
   private _colour: string = "#f00";
-  private _width: number = 10;
+  private _width: number = 8;
 
   constructor(position: Position) {
     this._position = position;

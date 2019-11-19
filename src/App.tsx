@@ -3,7 +3,6 @@ import GameContainer from "./components/GameContainer";
 class App {
   private _instance: GameContainer;
 
-  private allowTick: boolean = true;
   constructor(instance: GameContainer) {
     this._instance = instance;
   }
